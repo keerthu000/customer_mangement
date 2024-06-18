@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+    {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" /> {% endcomment %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js" defer></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        html {line-height: 1.15; -webkit-text-size-adjust: 100%; -webkit-tap-highlight-color: transparent; overflow-x: hidden; scroll-behavior: smooth;}
+        ::-webkit-scrollbar {width: 8px;}
+        ::-webkit-scrollbar-track {margin: 4px;}
+        ::-webkit-scrollbar-thumb {background: #c5c5c5; border-radius: 10px;}
+        ::selection {background-color: #000000;}
+        :root {
+            --main-bg: #f0f1f5;
+            --bg: #ffffff;
+            --color: #333;
+            --link: #3ea6ff;
+            --red: #ff0000;
+            --green: #adff2f;
+            --light-blue: #87cefa;
+        }
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --main-bg: #1F1F1F;
+                --bg: #282828;
+                --color: #f0f1f5;
+                --red: #b42121;
+                --green: #76a52f;
+                --light-blue: #447492;
+            }
+        }
+        * {margin: 0; padding: 0; word-wrap: break-word; font-size: 1rem; font-family: 'Raleway', sans-serif; box-sizing: border-box; color: var(--color);}
+        body {background-color: var(--bg);}
+        main {display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: var(--main-bg); padding: 22px;margin-top:42px;}
+        img {max-width: 100%; height: auto;}
+        form img {max-width: 250px; max-height: 250px;}
+        h2, input[type="submit"], input[type="button"], button {text-transform: uppercase;}
+        #register {width: 100%; max-width: 1000px;}
+        #register, #profile {border-radius: 10px;margin-left:240px;} input, button {border-radius: 5px;}
+        #register, #profile {background-color: var(--bg); display: flex; flex-flow: column wrap; gap: 8px; padding: 16px;}
+        .register__box {display: inherit; flex-flow: row wrap; gap: 8px;}
+        .register__box label {display: inherit; justify-content: space-between; align-items: center; flex: 1 100%;}
+        input, button{border: none; width: 100%; padding: 8px; background-color: var(--main-bg);}
+        input[type="submit"]:hover, input[type="button"]:hover, button:hover {background-color: rgb(0,0,0,.1);}
+        input[type="submit"]:active, input[type="button"]:active, button:active {background-color: rgb(0,0,0,.2);}
+        [class*="fa-asterisk"] {color: var(--red);}
+        input:focus:valid:not([type="submit"]){outline: none;
+            box-shadow: 1px 1px 2px .4px var(--green), inset 1px 1px 2px .4px var(--green);}
+        input:focus:invalid{outline: none;
+            box-shadow: 1px 1px 2px .4px var(--red), inset 1px 1px 2px .4px var(--red);}
+        input:focus:valid:not([type="submit"]),
+        select:focus:valid:not([type="submit"]) {
+            outline: none;
+            box-shadow: 1px 1px 2px .4px var(--green), inset 1px 1px 2px .4px var(--green);
+        }
+            
+        input:focus:invalid,
+        select:focus:invalid {
+            outline: none;
+            box-shadow: 1px 1px 2px .4px var(--red), inset 1px 1px 2px .4px var(--red);
+        } 
+        input[type="radio"], input[type="checkbox"], select {appearance: none; min-width: 20px; min-height: 20px; box-shadow: 0 0 0 1.5px #333; transition: .3s all;}
+        input[type="radio"] {border-radius: 50%;}
+        input[type="radio"]:checked, input[type="checkbox"]:checked {background-color: var(--bg);}
+        .conteiner__check {display: inherit; flex-flow: row wrap; gap: 8px; align-items: center;}
+        .conteiner__check.inline {gap: 16px;}
+        .contact__box label {display: inherit; justify-content: space-between; align-items: center; flex: 1 100%;}
+        .conteiner__check li {display: inherit; column-gap: 8px; align-items: center;}
+        .profile__img {border-radius: 50%;}
+        ::file-selector-button {background: var(--bg); border: none; border-radius: 5px; color: var(--color); padding: 16px; margin-right: 16px; text-transform: uppercase; font-size: .75rem; cursor: pointer;}
+        #register__btn {cursor: pointer;}
+        #overlay, #content__avatar {display: flex; gap: 16px; flex-direction: column; justify-content: center; align-items: center;}
+        #content__avatar {min-height: 100%; text-align: center;}
+        #overlay {position: fixed; top: 0; left: 0; background-color: rgba(0,0,0, .5); width: 100%; height: 100vh; z-index: 9999; transition: opacity .8s; opacity: 1; word-break: break-word;}
+        #overlay.hidden {opacity: 0; visibility: hidden;}
+        #avatar {width: 70vh; height: 70vh; background: var(--bg); border-radius: 8px; padding: 16px; overflow: hidden;}
+        #avatar.open {animation-name: stretch; animation-duration: .8s; animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);}
+        .profile__img {aspect-ratio: 1; object-fit: cover;}
+        .error {display: flex; justify-content: center; align-items: center; height: 100%; text-align: center;}
+        @keyframes stretch {
+        0% {transform: scale(.5); border-radius: 100%;}
+        100% {transform: scale(1);}
+        }
+        @media (max-width: 576px){
+        #register {min-width: 100%;}
+        #avatar {width: 70vw; height: 70vw; overflow-y: scroll;}
+        #avatar h2 {margin-bottom: 1rem;}
+        @keyframes stretch {
+            0% {transform: scale(.5);}
+            100% {transform: scale(1);}
+        }
+        }
+        @media (max-height: 480px){
+        #avatar {overflow-y: scroll;}
+        #avatar h2 {margin-bottom: 1rem;}
+        @keyframes stretch {
+            0% {transform: scale(.5);}
+            100% {transform: scale(1);}
+        }
+        }
+       
+        body {
+            background: whitesmoke;
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        .container {
+            max-width: 960px;
+            margin: 30px auto;
+            padding: 20px;
+        }
+        
+        h1 {
+            font-size: 20px;
+            text-align: center;
+            margin: 20px 0 20px;
+            small {
+                display: block;
+                font-size: 15px;
+                padding-top: 8px;
+                color: gray;
+            }
+        }
+        
+        .avatar-upload {
+            position: relative;
+            max-width: 205px;
+            margin: 50px auto;
+            .avatar-edit {
+                position: absolute;
+                right: 12px;
+                z-index: 1;
+                top: 10px;
+                input {
+                    display: none;
+                    + label {
+                        display: inline-block;
+                        width: 34px;
+                        height: 34px;
+                        margin-bottom: 0;
+                        border-radius: 100%;
+                        background: #FFFFFF;
+                        border: 1px solid transparent;
+                        box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+                        cursor: pointer;
+                        font-weight: normal;
+                        transition: all .2s ease-in-out;
+                        &:hover {
+                            background: #f1f1f1;
+                            border-color: #d6d6d6;
+                        }
+                        &:after {
+                            content: "\f040";
+                            font-family: 'FontAwesome';
+                            color: #757575;
+                            position: absolute;
+                            top: 10px;
+                            left: 0;
+                            right: 0;
+                            text-align: center;
+                            margin: auto;
+                        }
+                    }
+                }
+            }
+            .avatar-preview {
+                width: 192px;
+                height: 192px;
+                position: relative;
+                border-radius: 100%;
+                border: 6px solid #F8F8F8;
+                box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+                > div {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100%;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                }
+            }
+        }
+        .logo {
+            line-height: 1;
+          }
+          
+          @media (min-width: 1200px) {
+            .logo {
+              width: 280px;
+            }
+          }
+          
+          .logo img {
+            max-height: 56px;
+            margin-right: 26px;
+          }
+          
+          .logo span {
+            font-size: 16px;
+            font-weight: 700;
+            color: #012970;
+            font-family: "Nunito", sans-serif;
+          }
+          
+          .header {
+            transition: all 0.5s;
+            z-index: 997;
+            height: 60px;
+            box-shadow: 0px 2px 20px rgba(1, 41, 112, 0.1);
+            background-color: #fff;
+            padding-left: 20px;
+            /* Toggle Sidebar Button */
+            /* Search Bar */
+          }
+          
+          .header .toggle-sidebar-btn {
+            font-size: 32px;
+            padding-left: 10px;
+            cursor: pointer;
+            color: #012970;
+          }
+          
+          .header .search-bar {
+            min-width: 360px;
+            padding: 0 20px;
+          }
+          
+          @media (max-width: 1199px) {
+            .header .search-bar {
+              position: fixed;
+              top: 50px;
+              left: 0;
+              right: 0;
+              padding: 20px;
+              box-shadow: 0px 0px 15px 0px rgba(1, 41, 112, 0.1);
+              background: white;
+              z-index: 9999;
+              transition: 0.3s;
+              visibility: hidden;
+              opacity: 0;
+            }
+          
+            .header .search-bar-show {
+              top: 60px;
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+          
+          .header .search-form {
+            width: 100%;
+          }
+          
+          .header .search-form input {
+            border: 0;
+            font-size: 14px;
+            color: #012970;
+            border: 1px solid rgba(1, 41, 112, 0.2);
+            padding: 7px 38px 7px 8px;
+            border-radius: 3px;
+            transition: 0.3s;
+            width: 100%;
+          }
+          
+          .header .search-form input:focus,
+          .header .search-form input:hover {
+            outline: none;
+            box-shadow: 0 0 10px 0 rgba(1, 41, 112, 0.15);
+            border: 1px solid rgba(1, 41, 112, 0.3);
+          }
+          
+          .header .search-form button {
+            border: 0;
+            padding: 0;
+            margin-left: -30px;
+            background: none;
+          }
+          
+          .header .search-form button i {
+            color: #012970;
+          }
+          
+          /*--------------------------------------------------------------
+          # Header Nav
+          --------------------------------------------------------------*/
+          .header-nav ul {
+            list-style: none;
+          }
+          
+          .header-nav>ul {
+            margin: 0;
+            padding: 0;
+          }
+          
+          .header-nav .nav-icon {
+            font-size: 22px;
+            color: #012970;
+            margin-right: 25px;
+            position: relative;
+          }
+          
+          .header-nav .nav-profile {
+            color: #012970;
+          }
+          
+          .header-nav .nav-profile img {
+            max-height: 36px;
+          }
+          
+          .header-nav .nav-profile span {
+            font-size: 14px;
+            font-weight: 600;
+          }
+          
+          .header-nav .badge-number {
+            position: absolute;
+            inset: -2px -5px auto auto;
+            font-weight: normal;
+            font-size: 12px;
+            padding: 3px 6px;
+          }
+          
+          .header-nav .notifications {
+            inset: 8px -15px auto auto !important;
+          }
+          
+          .header-nav .notifications .notification-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 10px;
+            transition: 0.3s;
+          }
+          
+          .header-nav .notifications .notification-item i {
+            margin: 0 20px 0 10px;
+            font-size: 24px;
+          }
+          
+          .header-nav .notifications .notification-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+          }
+          
+          .header-nav .notifications .notification-item p {
+            font-size: 13px;
+            margin-bottom: 3px;
+            color: #919191;
+          }
+          
+          .header-nav .notifications .notification-item:hover {
+            background-color: #f6f9ff;
+          }
+          
+          .header-nav .messages {
+            inset: 8px -15px auto auto !important;
+          }
+          
+          .header-nav .messages .message-item {
+            padding: 15px 10px;
+            transition: 0.3s;
+          }
+          
+          .header-nav .messages .message-item a {
+            display: flex;
+          }
+          
+          .header-nav .messages .message-item img {
+            margin: 0 20px 0 10px;
+            max-height: 40px;
+          }
+          
+          .header-nav .messages .message-item h4 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #444444;
+          }
+          
+          .header-nav .messages .message-item p {
+            font-size: 13px;
+            margin-bottom: 3px;
+            color: #919191;
+          }
+          
+          .header-nav .messages .message-item:hover {
+            background-color: #f6f9ff;
+          }
+          
+          .header-nav .profile {
+            min-width: 240px;
+            padding-bottom: 0;
+            top: 8px !important;
+          }
+          
+          .header-nav .profile .dropdown-header h6 {
+            font-size: 18px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #444444;
+          }
+          
+          .header-nav .profile .dropdown-header span {
+            font-size: 14px;
+          }
+          
+          .header-nav .profile .dropdown-item {
+            font-size: 14px;
+            padding: 10px 15px;
+            transition: 0.3s;
+          }
+          
+          .header-nav .profile .dropdown-item i {
+            margin-right: 10px;
+            font-size: 18px;
+            line-height: 0;
+          }
+          
+          .header-nav .profile .dropdown-item:hover {
+            background-color: #f6f9ff;
+          }
+          .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            bottom: 0;
+            width: 300px;
+            z-index: 996;
+            transition: all 0.3s;
+            padding: 20px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #aab7cf transparent;
+            box-shadow: 0px 0px 20px rgba(1, 41, 112, 0.1);
+            background-color: #fff;
+          }
+          
+          @media (max-width: 1199px) {
+            .sidebar {
+              left: -300px;
+            }
+          }
+          
+          .sidebar::-webkit-scrollbar {
+            width: 5px;
+            height: 8px;
+            background-color: #fff;
+          }
+          
+          .sidebar::-webkit-scrollbar-thumb {
+            background-color: #aab7cf;
+          }
+          
+          @media (min-width: 1200px) {
+          
+            #main,
+            #footer {
+              margin-left: 300px;
+            }
+          }
+          
+          @media (max-width: 1199px) {
+            .toggle-sidebar .sidebar {
+              left: 0;
+            }
+          }
+          
+          @media (min-width: 1200px) {
+          
+            .toggle-sidebar #main,
+            .toggle-sidebar #footer {
+              margin-left: 0;
+            }
+          
+            .toggle-sidebar .sidebar {
+              left: -300px;
+            }
+          }
+          
+          .sidebar-nav {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+          }
+          
+          .sidebar-nav li {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+          }
+          
+          .sidebar-nav .nav-item {
+            margin-top: 50px;
+          }
+          
+          .sidebar-nav .nav-heading {
+            font-size: 11px;
+            text-transform: uppercase;
+            color: #899bbd;
+            font-weight: 600;
+            margin: 10px 0 5px 15px;
+          }
+          
+          .sidebar-nav .nav-link {
+            display: flex;
+            align-items: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: #4154f1;
+            transition: 0.3;
+            background: #f6f9ff;
+            padding: 10px 15px;
+            border-radius: 4px;
+          }
+          
+          .sidebar-nav .nav-link i {
+            font-size: 16px;
+            margin-right: 10px;
+            color: #4154f1;
+          }
+          
+          .sidebar-nav .nav-link.collapsed {
+            color: #012970;
+            background: #fff;
+          }
+          
+          .sidebar-nav .nav-link.collapsed i {
+            color: #899bbd;
+          }
+          
+          .sidebar-nav .nav-link:hover {
+            color: #4154f1;
+            background: #f6f9ff;
+          }
+          
+          .sidebar-nav .nav-link:hover i {
+            color: #4154f1;
+          }
+          
+          .sidebar-nav .nav-link .bi-chevron-down {
+            margin-right: 0;
+            transition: transform 0.2s ease-in-out;
+          }
+          
+          .sidebar-nav .nav-link:not(.collapsed) .bi-chevron-down {
+            transform: rotate(180deg);
+          }
+          
+          .sidebar-nav .nav-content {
+            padding: 5px 0 0 0;
+            margin: 0;
+            list-style: none;
+          }
+          
+          .sidebar-nav .nav-content a {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: #012970;
+            transition: 0.3;
+            padding: 10px 0 10px 40px;
+            transition: 0.3s;
+          }
+          
+          .sidebar-nav .nav-content a i {
+            font-size: 6px;
+            margin-right: 8px;
+            line-height: 0;
+            border-radius: 50%;
+          }
+          
+          .sidebar-nav .nav-content a:hover,
+          .sidebar-nav .nav-content a.active {
+            color: #4154f1;
+          }
+          
+          .sidebar-nav .nav-content a.active i {
+            background-color: #4154f1;
+          }
+          #main {
+            margin-top: 60px;
+            padding: 20px 30px;
+            transition: all 0.3s;
+          }
+          
+          @media (max-width: 1199px) {
+            #main {
+              padding: 20px;
+            }
+          }
+          .pagetitle {
+            margin-bottom: 10px;
+          }
+          
+          .pagetitle h1 {
+            font-size: 24px;
+            margin-bottom: 0;
+            font-weight: 600;
+            color: #012970;
+          }
+          
+          /*--------------------------------------------------------------
+          # Back to top button
+          --------------------------------------------------------------*/
+          .back-to-top {
+            position: fixed;
+            visibility: hidden;
+            opacity: 0;
+            right: 15px;
+            bottom: 15px;
+            z-index: 99999;
+            background: #4154f1;
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            transition: all 0.4s;
+          }
+          
+          .back-to-top i {
+            font-size: 24px;
+            color: #fff;
+            line-height: 0;
+          }
+          
+          .back-to-top:hover {
+            background: #6776f4;
+            color: #fff;
+          }
+          
+          .back-to-top.active {
+            visibility: visible;
+            opacity: 1;
+          }
+    </style>
+</head>
+<body>
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+  
+  
+        <nav class="header-nav ms-auto">
+          <ul class="d-flex align-items-center">
+    
+            <li class="nav-item d-block d-lg-none">
+              <a class="nav-link nav-icon search-bar-toggle " href="#">
+                <i class="bi bi-search"></i>
+              </a>
+            </li><!-- End Search Icon-->
+  
+              
+    
+            <li class="nav-item dropdown pe-3">
+    
+       
+    
+              <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                <li class="dropdown-header">
+                  <h6></h6>
+               
+                <li>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <i class="bi bi-box-arrow-right"></i>
+                    <span>Sign Out</span>
+                  </a>
+                </li>
+    
+              </ul><!-- End Profile Dropdown Items -->
+            </li><!-- End Profile Nav -->
+    
+          </ul>
+        </nav><!-- End Icons Navigation -->
+    
+    </header>
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav --> 
+    
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'createcustomer' %}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>Add customer Details</span>
+                </a>
+            </li>
+    
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'customerdetails'  checker.id %}">
+                    <i class="bi bi-person-circle"></i>
+                    <span>List of Customers Details</span>
+                </a>
+            </li>
+        </ul>
+    </aside>
+    
+    <main>
+        <form id="register" method="post" action="{% url 'create_profile' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2 id="register__title">Create Customer Profile</h2>
+            <div class="container">
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input type="file" name="image" id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" name="maker_id" value="{{ maker_id }}">
+             <input type="hidden" name="checker_id" value="{{ checker_id }}">
+            <div class="register__box">
+                <label for="user">User<i class="fas fa-asterisk"></i></label>
+                <input id="user" name="user" type="text" maxLength="64" required placeholder="Username">
+            </div>
+            <div class="register__box">
+                <label for="mail">E-mail<i class="fas fa-asterisk"></i></label>
+                <input id="mail" name="mail" type="email" size="64" maxLength="64" required placeholder="Example@gmail.com" pattern=".+@gmail.com" title="Example@gmail.com">
+            </div>
+            <div class="register__box">
+                <label for="qualification">Qualification<i class="fas fa-asterisk"></i></label>
+                <select id="qualification" name="qualification" required style="border:None;outline: none; width: 100%;
+                padding: 8px;  box-shadow: 1px 1px 2px .4px var(--LightGray);background-color:#edeff2;">
+                <option selected disabled>Select Any Qualification</option>
+                    <option value="Btech">Btech</option>
+                    <option value="Diploma">Diploma</option>
+                    <option value="Degree">Degree</option>
+                    <option value="ITI">ITI</option>
+                    <option value="Plus Two/10th">Plus Two/10th</option>
+                </select>
+            </div>
+            <div class="register__box conteiner__check">
+                <label for="genders">Gender</label>
+                <ul class="conteiner__check">
+                    {% comment %} <li>
+                        <input id="female" name="gender" type="radio" value="Female">
+                        <label for="female">Female</label>
+                    </li>
+                    <li>
+                        <input id="male" name="gender" type="radio" value="Male">
+                        <label for="male">Male</label>
+                    </li>
+                    <li>
+                        <input id="other" name="gender" type="radio" value="Other">
+                        <label for="other">Other</label>
+                    </li> {% endcomment %}
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="femaleGender" value="Female" 
+                          {% if form.gender.value == "Female" %} checked {% endif %}/>
+                      <label class="form-check-label" for="femaleGender">Female</label>
+                  </div>
+                  
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="maleGender" value="Male" 
+                          {% if form.gender.value == "Male" %} checked {% endif %}/>
+                      <label class="form-check-label" for="maleGender">Male</label>
+                  </div>
+                  
+                  <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="radio" name="gender" id="otherGender" value="Other" 
+                          {% if form.gender.value == "Other" %} checked {% endif %}/>
+                      <label class="form-check-label" for="otherGender">Other</label>
+                  </div>
+              </div>
+                </ul>
+            </div>
+            <div class="register__box">
+                <label for="age">Age</label>
+                <input id="age" name="age" type="date" minLength="2">
+            </div>
+            <input type="hidden" name="maker_id" value="{{ maker_id }}">
+            <input type="hidden" name="checker_id" value="{{ checker_id }}">
+            {% comment %} <div class="register__box">
+              <label for="maker">Maker<i class="fas fa-asterisk"></i></label>
+              <select id="maker" name="maker" required style="border:None;outline: none; width: 100%;
+              padding: 8px;  box-shadow: 1px 1px 2px .4px var(--LightGray);background-color:#edeff2;">
+                  {% for maker in makers %}
+                      <option value="{{ maker.id }}">{{ maker.firstname }}{{ maker.lastname }}</option>
+                  {% endfor %}
+              </select>
+          </div>
+          
+          <div class="register__box">
+              <label for="checker">Checker<i class="fas fa-asterisk"></i></label>
+              <select id="checker" name="checker" required style="border:None;outline: none; width: 100%;
+              padding: 8px;  box-shadow: 1px 1px 2px .4px var(--LightGray);background-color:#edeff2;">
+                <option selected disabled>Select Any 
+                  {% for checker in checkers %}
+                      <option value="{{ checker.id }}">{{ checker.firstname }}{{ checker.lastname }}</option>
+                  {% endfor %}
+              </select> {% endcomment %}
+          </div>
+            <div class="register__box">
+                <label for="resume">Resume</label>
+                <input type="file" id="resume" name="resume" accept=".pdf, .doc, .docx">
+                <div id="preview">
+                    <p>No files currently selected for upload</p>
+                </div>
+            </div>
+            <button type="submit" id="register__btn">Create profile</button>
+        </form>
+        
+      <div id="overlay" class="hidden">
+        <div id="avatar"></div>
+      </div>
+    </main>
+    <script crossorigin='anonymous' src='https://kit.fontawesome.com/85274771d6.js'></script>
+    <script>
+        document.getElementById('resume').addEventListener('change', function(event) {
+            const preview = document.getElementById('preview');
+            const file = event.target.files[0];
+            if (file) {
+                preview.innerHTML = `<p>Selected file: ${file.name}</p>`;
+            } else {
+                preview.innerHTML = '<p>No files currently selected for upload</p>';
+            }
+        });
+        </script>
+        <script>
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function(e) {
+                        $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+                        $('#imagePreview').hide();
+                        $('#imagePreview').fadeIn(650);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            $("#imageUpload").change(function() {
+                readURL(this);
+            });
+        </script>
+  </body>
+
+</html>

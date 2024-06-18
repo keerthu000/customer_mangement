@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Login</title>
+    {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" /> {% endcomment %}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<style>
+  table tr td:hover {
+  cursor: pointer;
+}
+</style>
+</head>
+<body  style="background-color: rgba(176, 199, 205, 0.4);">
+  
+
+
+<div class="body-wrapper">
+  <div class="container-fluid">
+
+    
+
+     <h3 class="text-center"><b style=" margin-bottom: 20px;">Show Customer Details</b></h3>
+      <div style="overflow-x:auto;">  
+        <table class="table table-hover  mt-5 " style="background-color: white;box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+            <thead>
+              <tr>
+                <th scope="col" style="color: black;"><b>ID</b></th>
+                <th scope="col" style="color: black;"><b>Customer  Name</b></th>
+                <th scope="col" style="color: black;"><b>Email</b></th>
+                <th scope="col" style="color: black;"><b>Resume</b></th>
+                <th scope="col" style="color: black;"><b>images</b></th>
+                
+                <th scope="col" style="color: black;"><b>Action</b></th>
+
+              </tr>
+            </thead>
+            <tbody>
+                {% for c in customers %}
+              <tr>
+                
+                <td>{{c.id}}</th>
+                <td> <b><a href="" style="color: black;">{{c.username}}</a></b></td>
+                <td>{{ c.emailid }}</td>
+               
+                <td>
+                  {% if c.resume %}
+                      <a href="{{ c.resume.url }}" target="_blank">View Resume</a>
+                  {% else %}
+                      No Resume
+                  {% endif %}
+              </td>
+              <td>
+                {% if c.image %}
+                    <img src="{{ c.image.url }}" alt="{{ c.username }}" style="height: 100px;">
+                {% else %}
+                    No Image
+                {% endif %}
+            </td>
+            
+            
+            <td>
+                {% if c.status == 'pending' %}
+                    <div style="display: flex; gap: 10px;">
+                        <form method="post" action="{% url 'approve_customer' c.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-primary">Approve</button>
+                        </form>
+                        <form method="post" action="{% url 'reject_customer' c.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>
+                {% else %}
+                    {{ c.status|capfirst }}
+                {% endif %}
+            </td>
+                
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table> 
+        </div>
+
+  </div>
+</div>
+</body>
+
+</html>

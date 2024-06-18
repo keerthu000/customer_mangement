@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    {% comment %} <link rel="shortcut icon" type="image/png" href="{% static 'assets/images/logos/favicon.png' %}" /> {% endcomment %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css" rel="stylesheet" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js" defer></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* body{
+            background-color: rgb(193, 221, 245);
+        } */
+        body{
+          background-color: rgba(176, 199, 205, 0.4);
+        }
+        @media screen and (min-width: 768px) {
+            .card{
+                width: 80%;
+            }
+        }
+        
+        h6{
+          color: white;
+        }
+        h6:hover{
+          color: #16c7ff;
+        
+    
+        }
+        .fa:hover{
+          color: #16c7ff;
+          
+          animation: swing ease-in-out 0.5s 1 alternate;
+          
+        }
+        .ti:hover{
+          color: #16c7ff;
+          
+          animation: swing ease-in-out 0.5s 1 alternate;
+          
+        }
+        #col1:hover{
+          color: #16c7ff;
+          text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+          cursor: pointer;
+         
+    
+    
+        }
+        
+        #col2:hover{
+          color: #16c7ff;
+          text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+          cursor: pointer;
+    
+        }
+        .card .fa:hover{
+          color: #16c7ff;
+          text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+          cursor: pointer;
+        }
+        .card h5:hover{
+          
+          text-shadow: 0px 0px 10px rgba(22, 199, 255, 0.5);
+          cursor: pointer;
+        }
+        
+    
+    </style>
+    
+    
+
+</head>
+<body>
+    <div class="body-wrapper">
+        <div class="container-fluid" >
+     
+        
+            <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+                <div class="card-body">
+        
+        
+                    
+        
+                    <div class="row">
+                    <div class="col-md-9">
+                        <a href="{% url 'checkeregister' %}">
+                        <h5 class="card-title mb-9 fw-semibold"><b>Checker</b></h5>
+                    </a>
+                        
+        
+                    </div>
+                    <div class="col">
+                        <a href="">
+                        <i class="fa fa-users text-primary" style="font-size: 2em;"></i>
+                    </a>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>      
+            
+            <div class="col-md-4">
+                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+                <div class="card-body">
+                    <div class="row">
+                    <div class="col-md-9">
+                        <a href="{% url 'maker_register' %}">
+                        
+                        <h5 class="card-title mb-9 fw-semibold"><b>Maker</b></h5>
+                        </a>
+                        
+        
+                    </div>
+                    <div class="col">
+                        <a href="">
+                        <i class="fa fa-users text-primary" style="font-size: 2.3em;"></i>
+                    </a>
+                        
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>   
+            </div>
+            </div>
+
+
+            <div class="row mt-5" style="margin-left:300px;">
+                <div class="col-md-4">
+                <div class="card" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" >
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                            <a href="{% url 'loginpage' %}">
+                                <h5 class="card-title mb-9 fw-semibold"><b>Sign In</b></h5>
+                            </a>
+                            
+            
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</body>
+</html>
